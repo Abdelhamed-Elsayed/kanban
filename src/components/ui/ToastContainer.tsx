@@ -60,13 +60,15 @@ function ToastItem({ toast }: { toast: Toast }) {
         transition: "opacity 0.28s ease, transform 0.28s ease",
       }}
     >
-      {/* Icon */}
-      <div
-        className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
-        style={{ background: toast.undoTask ? "var(--danger-light)" : "var(--accent-light)" }}
-      >
-        <Trash2 size={15} style={{ color: toast.undoTask ? "var(--danger)" : "var(--accent)" }} />
-      </div>
+     {/* Icon */}
+{toast.undoTask && (
+  <div
+    className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+    style={{ background: "var(--danger-light)" }}
+  >
+    <Trash2 size={15} style={{ color: "var(--danger)" }} />
+  </div>
+)}
 
       {/* Text */}
       <div className="flex-1 min-w-0">
