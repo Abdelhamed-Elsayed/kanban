@@ -39,7 +39,7 @@ A modern and responsive **Kanban board web application** inspired by Trello. Bui
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/kanban-board.git
+   git clone https://github.com/Abdelhamed-Elsayed/kanban.git
    cd kanban-board
 
 2. **Install dependencies:**
