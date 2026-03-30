@@ -1,0 +1,101 @@
+:root {
+  /* ===========================
+     BACKGROUNDS
+     =========================== */
+  --bg-primary: #f5f7fa;      /* خفيف ومريح للعين */
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f3f6f9;
+  --bg-surface-hover: #e8edf3;
+
+  /* ===========================
+     BORDERS
+     =========================== */
+  --border: #d0d7e0;
+  --border-subtle: #e2e8ef;
+
+  /* ===========================
+     TEXT
+     =========================== */
+  --text-primary: #0f1f33;    /* أقل حدة */
+  --text-secondary: #2a3d53;
+  --text-muted: #526875;
+
+  /* ===========================
+     ACCENTS / ACTIONS
+     =========================== */
+  --accent: #0b7caa;
+  --accent-hover: #06627f;
+  --accent-light: #d0f0fb;
+  --accent-glow: rgba(11, 124, 170, 0.15);
+
+  /* ===========================
+     FEEDBACK COLORS
+     =========================== */
+  --success: #0f7d57;
+  --success-light: #daf4e6;
+
+  --warning: #a56a10;
+  --warning-light: #fff3e0;
+
+  --danger: #b72a28;
+  --danger-light: #fde2e2;
+
+  /* ===========================
+     SHADOWS
+     =========================== */
+  --shadow-sm: 0 1px 3px rgba(15, 31, 51, 0.08), 0 1px 2px rgba(15, 31, 51, 0.04);
+  --shadow-md: 0 6px 16px rgba(15, 31, 51, 0.12), 0 2px 6px rgba(15, 31, 51, 0.06);
+  --shadow-lg: 0 14px 40px rgba(15, 31, 51, 0.12), 0 6px 18px rgba(15, 31, 51, 0.08);
+  --shadow-accent: 0 6px 24px rgba(11, 124, 170, 0.18);
+}
+
+.dark {
+  /* ===========================
+     BACKGROUNDS
+     =========================== */
+  --bg-primary: #0c1824;      /* أغمق، مريح للعين */
+  --bg-surface: #0f1f2f;
+  --bg-surface-2: #142635;
+  --bg-surface-hover: #1b3044;
+
+  /* ===========================
+     BORDERS
+     =========================== */
+  --border: #1c3b53;
+  --border-subtle: #173141;
+
+  /* ===========================
+     TEXT
+     =========================== */
+  --text-primary: #e1f1f8;
+  --text-secondary: #bcd5e4;
+  --text-muted: #8ba3b6;
+
+  /* ===========================
+     ACCENTS / ACTIONS
+     =========================== */
+  --accent: #1fb2e0;
+  --accent-hover: #2dc4f2;
+  --accent-light: rgba(31, 178, 224, 0.12);
+  --accent-glow: rgba(31, 178, 224, 0.22);
+
+  /* ===========================
+     FEEDBACK COLORS
+     =========================== */
+  --success: #34d39b;
+  --success-light: rgba(52, 211, 155, 0.12);
+
+  --warning: #fabb3d;
+  --warning-light: rgba(250, 187, 61, 0.14);
+
+  --danger: #fb6f79;
+  --danger-light: rgba(251, 111, 121, 0.12);
+
+  /* ===========================
+     SHADOWS
+     =========================== */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 18px 45px rgba(0, 0, 0, 0.38);
+  --shadow-accent: 0 8px 30px rgba(31, 178, 224, 0.2);
+}

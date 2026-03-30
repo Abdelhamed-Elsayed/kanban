@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "title": "Design System",
+    "description": "Create comprehensive design system with tokens and components",
+    "priority": "high",
+    "status": "todo",
+    "tags": ["design", "ui"],
+    "date": "3/29/2026"
+  },
+  {
+    "id": "2",
+    "title": "Bug Fixes",
+    "description": "Fix critical production bugs reported by QA team",
+    "priority": "high",
+    "status": "todo",
+    "tags": ["urgent", "bug"],
+    "date": "3/29/2026"
+  },
+  {
+    "id": "3",
+    "title": "API Integration",
+    "description": "Connect frontend with REST API endpoints for user authentication",
+    "priority": "high",
+    "status": "progress",
+    "tags": ["dev", "backend"],
+    "date": "3/29/2026"
+  },
+  {
+    "id": "4",
+    "title": "Unit Tests",
+    "description": "Write comprehensive test suite for core business logic",
+    "priority": "medium",
+    "status": "done",
+    "tags": ["testing"],
+    "date": "3/28/2026"
+  },
+  {
+    "id": "5",
+    "title": "Documentation",
+    "description": "Write project documentation and usage guide",
+    "priority": "low",
+    "status": "todo",
+    "tags": ["docs"],
+    "date": "3/29/2026"
+  }
+]
