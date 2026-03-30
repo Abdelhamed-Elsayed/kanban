@@ -3,7 +3,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Task, useTaskStore } from "../../store/useTaskStore";
 import { useToastStore } from "../../store/useToastStore";
-import { MoreVertical, Edit3, Trash2, Tag, Calendar } from "lucide-react";
+import { MoreVertical, Edit3, Trash2, Tag, Calendar } from "../../lib/icons";
 
 const priorityConfig = {
   high: { label: "High", color: "var(--danger)", bg: "var(--danger-light)" },
@@ -94,6 +94,8 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
           <button
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); setMenuOpen((v) => !v); }}
+            aria-label="Task options"
+            aria-expanded={menuOpen}
             className="p-1 rounded-lg transition opacity-0 group-hover:opacity-100"
             style={{ color: "var(--text-muted)" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "var(--bg-surface-hover)")}

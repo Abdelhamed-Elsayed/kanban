@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Plus } from "lucide-react";
+import { X, Plus } from "../../lib/icons";
 import { Priority, Status, useTaskStore } from "../../store/useTaskStore";
 
 const inputStyle = {

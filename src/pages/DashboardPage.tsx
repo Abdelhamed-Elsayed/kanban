@@ -3,7 +3,7 @@ import { useTaskStore } from "../store/useTaskStore";
 import StatCard from "../components/dashboard/StatsCard";
 import RecentTaskRow from "../components/dashboard/RecentTaskRow";
 import QuickActionCard from "../components/dashboard/QuickActionCard";
-import { ClipboardList, AlertCircle, Clock3, CheckCircle2, KanbanSquare, BarChart3 } from "lucide-react";
+import { ClipboardList, AlertCircle, Clock3, CheckCircle2, KanbanSquare, BarChart3 } from "../lib/icons";
 
 export default function DashboardPage() {
   const { tasks, loadTasks } = useTaskStore((s) => ({ tasks: s.tasks, loadTasks: s.loadTasks }));
@@ -35,25 +35,30 @@ export default function DashboardPage() {
     { label: "Completed", value: done, sub: "Done tasks", icon: CheckCircle2, color: "var(--success)" },
   ], [total, high, inProgress, done]);
 
-  const priorityColor: Record<string,string> = { high: "var(--danger)", medium: "var(--warning)", low: "var(--success)" };
-  const priorityBg: Record<string,string> = { high: "var(--danger-light)", medium: "var(--warning-light)", low: "var(--success-light)" };
+  const priorityColor: Record<string, string> = { high: "var(--danger)", medium: "var(--warning)", low: "var(--success)" };
+  const priorityBg: Record<string, string> = { high: "var(--danger-light)", medium: "var(--warning-light)", low: "var(--success-light)" };
 
   return (
     <div className="animate-fadeInUp">
       <div className="mb-6">
-        <h1 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>Dashboard</h1>
-        <p className="text-sm mt-0.5" style={{ color: "var(--text-muted)" }}>Overview of your workspace</p>
+        <h1 className="text-xl font-bold"
+          style={{ color: "var(--text-primary)" }}>Dashboard</h1>
+        <p className="text-sm mt-0.5"
+          style={{ color: "var(--text-muted)" }}>Overview of your workspace</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {stats.map((s,i) => <StatCard key={s.label} {...s} delay={i*60} />)}
+        {stats.map((s, i) => <StatCard key={s.label} {...s} delay={i * 60} />)}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-2xl p-5" style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
-          <h2 className="font-semibold text-sm mb-4" style={{ color: "var(--text-primary)" }}>Recent Activity</h2>
+        <div className="rounded-2xl p-5"
+          style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
+          <h2 className="font-semibold text-sm mb-4"
+            style={{ color: "var(--text-primary)" }}>Recent Activity</h2>
           <div className="space-y-3">
-            {recent.length === 0 && <p className="text-sm text-center py-4" style={{ color: "var(--text-muted)" }}>No tasks yet</p>}
+            {recent.length === 0 && <p className="text-sm text-center py-4"
+              style={{ color: "var(--text-muted)" }}>No tasks yet</p>}
             {recent.map(task => <RecentTaskRow key={task.id} task={task} priorityColor={priorityColor} priorityBg={priorityBg} formatDate={formatDate} />)}
           </div>
         </div>

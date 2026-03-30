@@ -1,4 +1,4 @@
-import { Menu, Sun, Moon, Bell } from "lucide-react";
+import { Menu, Sun, Moon, Bell } from "../../lib/icons";
 import { useThemeStore } from "../../store/useThemeStore";
 
 export default function Navbar({ onOpenSidebar }: { onOpenSidebar: () => void }) {
@@ -17,6 +17,7 @@ export default function Navbar({ onOpenSidebar }: { onOpenSidebar: () => void })
         className="md:hidden p-2 rounded-xl transition"
         style={{ color: "var(--text-secondary)" }}
         onClick={onOpenSidebar}
+        aria-label="Open sidebar"
       >
         <Menu size={20} />
       </button>
@@ -28,6 +29,7 @@ export default function Navbar({ onOpenSidebar }: { onOpenSidebar: () => void })
         <button
           className="p-2 rounded-xl transition"
           style={{ color: "var(--text-muted)" }}
+          aria-label="Notifications"
           title="Notifications"
         >
           <Bell size={18} />
@@ -38,6 +40,7 @@ export default function Navbar({ onOpenSidebar }: { onOpenSidebar: () => void })
           onClick={toggle}
           className="p-2 rounded-xl transition"
           style={{ color: "var(--text-secondary)" }}
+          aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
           title={dark ? "Light mode" : "Dark mode"}
         >
           {dark ? <Sun size={18} /> : <Moon size={18} />}

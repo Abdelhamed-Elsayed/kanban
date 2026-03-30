@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Plus } from "../../lib/icons";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { Virtuoso } from "react-virtuoso";
 import { Task, Status } from "../../store/useTaskStore";
@@ -74,6 +74,7 @@ export default function Column({
         <button
           onClick={() => setOpen(true)}
           className="p-1.5 rounded-lg transition"
+          aria-label={`Add task to ${cfg.label}`}
           style={{ color: "var(--text-muted)" }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background =

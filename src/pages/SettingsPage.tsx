@@ -1,6 +1,6 @@
 // pages/SettingsPage.tsx
 import { useState } from "react";
-import { Moon, Sun, Bell, Mail, Shield, Globe, Clock, Zap, CheckCircle2, Save } from "lucide-react";
+import { Moon, Sun, Bell, Mail, Shield, Globe, Clock, Zap, CheckCircle2, Save } from "../lib/icons";
 import { useThemeStore } from "../store/useThemeStore";
 import { useSettingsStore } from "../store/useSettingsStore";
 import { Toggle } from "../components/settings/Toggle";

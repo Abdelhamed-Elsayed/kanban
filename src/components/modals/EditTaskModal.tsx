@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, Trash2, Save } from "lucide-react";
+import { X, Trash2, Save } from "../../lib/icons";
 import { Priority, Task, useTaskStore } from "../../store/useTaskStore";
 import { useToastStore } from "../../store/useToastStore";
 

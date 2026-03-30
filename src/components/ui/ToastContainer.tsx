@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useToastStore, Toast } from "../../store/useToastStore";
 import { useTaskStore } from "../../store/useTaskStore";
-import { X, Trash2, RotateCcw } from "lucide-react";
+import { X, Trash2, RotateCcw } from "../../lib/icons";
 
 function ToastItem({ toast }: { toast: Toast }) {
   const remove = useToastStore((s) => s.remove);

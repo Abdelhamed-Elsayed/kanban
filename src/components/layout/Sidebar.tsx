@@ -1,12 +1,5 @@
 import { NavLink } from "react-router-dom";
-import {
-  LayoutDashboard,
-  KanbanSquare,
-  BarChart3,
-  Settings,
-  LogOut,
-  X,
-} from "lucide-react";
+import { LayoutDashboard, KanbanSquare, BarChart3, Settings, LogOut, X } from "../../lib/icons";
 
 const links = [
   { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -61,6 +54,7 @@ export default function Sidebar({
             onClick={onClose}
             className="md:hidden p-1.5 rounded-lg"
             style={{ color: "var(--text-muted)" }}
+            aria-label="Close sidebar"
           >
             <X size={17} />
           </button>
@@ -103,6 +97,7 @@ export default function Sidebar({
         <button
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150"
           style={{ color: "var(--text-muted)" }}
+          aria-label="Sign out"
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background =
               "var(--bg-surface-hover)";

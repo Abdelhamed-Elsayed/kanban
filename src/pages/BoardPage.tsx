@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState, useDeferredValue } from "react";
 import Board from "../components/board/Board";
 import { useTaskStore } from "../store/useTaskStore";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter } from "../lib/icons";
 
 export default function BoardPage() {
-  // ✅ Zustand selector واحد لتقليل rerenders
+
   const { loadTasks } = useTaskStore((s) => ({
     loadTasks: s.loadTasks,
   }));
@@ -12,10 +12,8 @@ export default function BoardPage() {
   const [search, setSearch] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("all");
 
-  // ✅ تحسين البحث: يخلي الكتابة أسرع حتى لو البيانات كبيرة
   const deferredSearch = useDeferredValue(search);
 
-  // ✅ priorities ثابتة (مش بتتعمل كل render)
   const priorities = useMemo(
     () => [
       { value: "all", label: "All Priorities" },
@@ -26,7 +24,6 @@ export default function BoardPage() {
     []
   );
 
-  // ✅ منع loadTasks يشتغل مرتين في React Strict Mode
   const loadedRef = useRef(false);
 
   useEffect(() => {
@@ -66,10 +63,10 @@ export default function BoardPage() {
               style={
                 priorityFilter === p.value
                   ? {
-                      background: "var(--bg-surface)",
-                      color: "var(--accent)",
-                      boxShadow: "var(--shadow-sm)",
-                    }
+                    background: "var(--bg-surface)",
+                    color: "var(--accent)",
+                    boxShadow: "var(--shadow-sm)",
+                  }
                   : { color: "var(--text-muted)" }
               }
             >
@@ -102,7 +99,6 @@ export default function BoardPage() {
         />
       </div>
 
-      {/* Board */}
       <Board search={deferredSearch} priorityFilter={priorityFilter} />
     </div>
   );

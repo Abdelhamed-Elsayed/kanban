@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock3 } from "lucide-react";
+import { Clock3 } from "../../lib/icons";
 
 interface RecentTaskRowProps {
   task: any;

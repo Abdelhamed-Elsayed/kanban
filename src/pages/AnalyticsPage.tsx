@@ -59,14 +59,18 @@ export default function AnalyticsPage() {
   return (
     <div className="animate-fadeInUp">
       <div className="mb-6">
-        <h1 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>Analytics</h1>
-        <p className="text-sm mt-0.5" style={{ color: "var(--text-muted)" }}>Task insights and progress overview</p>
+        <h1 className="text-xl font-bold"
+          style={{ color: "var(--text-primary)" }}>Analytics</h1>
+        <p className="text-sm mt-0.5"
+          style={{ color: "var(--text-muted)" }}>Task insights and progress overview</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         {/* Priority */}
-        <div className="rounded-2xl p-5" style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
-          <h2 className="font-semibold text-sm mb-5" style={{ color: "var(--text-primary)" }}>Tasks by Priority</h2>
+        <div className="rounded-2xl p-5"
+          style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
+          <h2 className="font-semibold text-sm mb-5"
+            style={{ color: "var(--text-primary)" }}>Tasks by Priority</h2>
           <div className="space-y-4">
             <Bar label="High Priority" color="var(--danger)" count={analytics.high} total={analytics.total} />
             <Bar label="Medium Priority" color="var(--warning)" count={analytics.medium} total={analytics.total} />
@@ -75,8 +79,10 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Status */}
-        <div className="rounded-2xl p-5" style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
-          <h2 className="font-semibold text-sm mb-5" style={{ color: "var(--text-primary)" }}>Tasks by Status</h2>
+        <div className="rounded-2xl p-5"
+          style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-sm)" }}>
+          <h2 className="font-semibold text-sm mb-5"
+            style={{ color: "var(--text-primary)" }}>Tasks by Status</h2>
           <div className="space-y-4">
             <Bar label="To Do" color="var(--danger)" count={analytics.todo} total={analytics.total} />
             <Bar label="In Progress" color="var(--warning)" count={analytics.progress} total={analytics.total} />
@@ -85,7 +91,6 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      {/* Completion */}
       <CompletionCircle completion={analytics.completion} done={analytics.done} total={analytics.total} />
     </div>
   );
