@@ -1,5 +1,6 @@
 
-
+export {ChevronRight} from "lucide-react";
+export {ChevronLeft} from "lucide-react";
 export { Plus } from "lucide-react";
 export { MoreVertical } from "lucide-react";
 export { Edit3 } from "lucide-react";

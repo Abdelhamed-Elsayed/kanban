@@ -30,7 +30,7 @@ export default function QuickActionCard({
       style={{
         background: bgColor,
         border: `1px solid color-mix(in srgb, ${color} 20%, transparent)`,
-        minHeight: "80px", // زيادة ارتفاع الكارت
+        minHeight: "40px", 
       }}
       onMouseEnter={(e) =>
         ((e.currentTarget as HTMLElement).style.boxShadow =

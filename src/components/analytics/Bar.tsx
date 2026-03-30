@@ -1,4 +1,3 @@
-// components/analytics/Bar.tsx
 import React, { memo } from "react";
 
 type BarProps = {

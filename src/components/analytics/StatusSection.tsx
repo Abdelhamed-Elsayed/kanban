@@ -1,5 +1,4 @@
-// components/analytics/StatusSection.tsx
-import React from "react";
+
 import { Bar } from "./Bar";
 
 interface Props {

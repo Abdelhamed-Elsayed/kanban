@@ -1,5 +1,3 @@
-// components/analytics/PrioritySection.tsx
-import React from "react";
 import { Bar } from "./Bar";
 
 interface Props {

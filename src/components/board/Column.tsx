@@ -29,6 +29,7 @@ export default function Column({
   tasks: Task[];
   onEditTask: (task: Task) => void;
   isOver?: boolean;
+  isMobile?:boolean;
 }) {
   const [open, setOpen] = useState(false);
   const cfg = statusConfig[status];

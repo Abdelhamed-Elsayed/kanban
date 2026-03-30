@@ -63,15 +63,15 @@ function ToastItem({ toast }: { toast: Toast }) {
       {/* Icon */}
       <div
         className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
-        style={{ background: "var(--danger-light)" }}
+        style={{ background: toast.undoTask ? "var(--danger-light)" : "var(--accent-light)" }}
       >
-        <Trash2 size={15} style={{ color: "var(--danger)" }} />
+        <Trash2 size={15} style={{ color: toast.undoTask ? "var(--danger)" : "var(--accent)" }} />
       </div>
 
       {/* Text */}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-          Task deleted
+          {toast.message}
         </p>
         {toast.undoTask && (
           <p className="text-xs mt-0.5 truncate" style={{ color: "var(--text-muted)" }}>
@@ -120,7 +120,8 @@ function ToastItem({ toast }: { toast: Toast }) {
 export default function ToastContainer() {
   const toasts = useToastStore((s) => s.toasts);
   return (
-    <div className="fixed bottom-5 right-5 z-[9999] flex flex-col gap-3 pointer-events-none" style={{ alignItems: "flex-end" }}>
+    <div className="fixed bottom-5 right-5 z-[9999] flex flex-col gap-3 pointer-events-none"
+      style={{ alignItems: "flex-end" }}>
       {toasts.map((t) => (
         <div
           key={t.id}

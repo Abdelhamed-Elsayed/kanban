@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Task, useTaskStore } from "../../store/useTaskStore";
+import { Task, useTaskStore, Status } from "../../store/useTaskStore";
 import { useToastStore } from "../../store/useToastStore";
-import { MoreVertical, Edit3, Trash2, Tag, Calendar } from "../../lib/icons";
+import { MoreVertical, Edit3, Trash2, Tag, Calendar, ChevronLeft, ChevronRight } from "../../lib/icons";
 
 const priorityConfig = {
   high: { label: "High", color: "var(--danger)", bg: "var(--danger-light)" },
@@ -11,11 +11,34 @@ const priorityConfig = {
   low: { label: "Low", color: "var(--success)", bg: "var(--success-light)" },
 };
 
-export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: Task) => void }) {
+function getNextStatus(status: Status) {
+  if (status === "todo") return "progress";
+  if (status === "progress") return "done";
+  return "done";
+}
+
+function getPrevStatus(status: Status) {
+  if (status === "done") return "progress";
+  if (status === "progress") return "todo";
+  return "todo";
+}
+
+export default function TaskCard({
+  task,
+  onEdit,
+  isMobile,
+}: {
+  task: Task;
+  onEdit: (task: Task) => void;
+  isMobile?: boolean;
+}) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: task.id });
+
   const deleteTask = useTaskStore((s) => s.deleteTask);
+  const moveTask = useTaskStore((s) => s.moveTask);
   const pushToast = useToastStore((s) => s.push);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +48,6 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
     opacity: isDragging ? 0.3 : 1,
   };
 
-  // Close menu on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node))
@@ -38,7 +60,6 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     setMenuOpen(false);
-    // Soft-delete: remove immediately, store snapshot for Undo
     const snapshot = { ...task };
     deleteTask(task.id);
     pushToast({ message: "Task deleted", undoTask: snapshot, duration: 5000 });
@@ -50,13 +71,31 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
     onEdit(task);
   };
 
+  const handleMoveRight = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (task.status === "done") return;
+    const next = getNextStatus(task.status);
+    moveTask(task.id, next);
+    const label = next === "progress" ? "In Progress" : "Done";
+    pushToast({ message: `Moved to ${label}`, duration: 3000 });
+  };
+
+  const handleMoveLeft = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (task.status === "todo") return;
+    const prev = getPrevStatus(task.status);
+    moveTask(task.id, prev);
+    const label = prev === "todo" ? "To Do" : "In Progress";
+    pushToast({ message: `Moved to ${label}`, duration: 3000 });
+  };
+
   const p = priorityConfig[task.priority];
 
   const formattedDate = new Date(task.date).toLocaleDateString("en-GB", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-});
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 
   return (
     <div
@@ -67,19 +106,11 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
         border: "1px solid var(--border-subtle)",
         borderRadius: 12,
         boxShadow: "var(--shadow-sm)",
-        cursor: "grab",
+        cursor: isMobile ? "default" : "grab",
       }}
       className="p-4 group animate-fadeInUp transition-shadow duration-150"
       {...attributes}
-      {...listeners}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
-        (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)";
-        (e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)";
-      }}
+      {...(!isMobile ? listeners : {})}
     >
       {/* Priority badge + 3-dot menu */}
       <div className="flex items-start justify-between gap-2">
@@ -93,13 +124,14 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
         <div className="relative" ref={menuRef}>
           <button
             onPointerDown={(e) => e.stopPropagation()}
-            onClick={(e) => { e.stopPropagation(); setMenuOpen((v) => !v); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuOpen((v) => !v);
+            }}
             aria-label="Task options"
             aria-expanded={menuOpen}
             className="p-1 rounded-lg transition opacity-0 group-hover:opacity-100"
             style={{ color: "var(--text-muted)" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "var(--bg-surface-hover)")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
           >
             <MoreVertical size={15} />
           </button>
@@ -113,28 +145,22 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
                 boxShadow: "var(--shadow-lg)",
               }}
             >
-              {/* Edit */}
               <button
                 onPointerDown={(e) => e.stopPropagation()}
                 onClick={handleEdit}
                 className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition"
                 style={{ color: "var(--text-secondary)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "var(--bg-surface-hover)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
               >
                 <Edit3 size={14} /> Edit Task
               </button>
 
               <div style={{ height: 1, background: "var(--border-subtle)" }} />
 
-              {/* Delete → toast with Undo */}
               <button
                 onPointerDown={(e) => e.stopPropagation()}
                 onClick={handleDelete}
                 className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition"
                 style={{ color: "var(--danger)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "var(--danger-light)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
               >
                 <Trash2 size={14} /> Delete
               </button>
@@ -172,7 +198,8 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
         </div>
       )}
 
-      <div className="mt-3 flex items-center justify-between">
+      {/* Date + buttons */}
+      <div className="mt-3 flex items-center justify-between gap-2">
         <div
           className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium"
           style={{
@@ -184,6 +211,39 @@ export default function TaskCard({ task, onEdit }: { task: Task; onEdit: (task: 
           <Calendar size={12} />
           <span>{formattedDate}</span>
         </div>
+
+        {/* Move buttons — mobile only */}
+        {isMobile && (
+          <div className="flex items-center gap-1">
+            <button
+              onClick={handleMoveLeft}
+              disabled={task.status === "todo"}
+              className="p-1.5 rounded-lg transition"
+              style={{
+                background: "var(--bg-surface-2)",
+                border: "1px solid var(--border-subtle)",
+                opacity: task.status === "todo" ? 0.4 : 1,
+              }}
+              aria-label="Move task left"
+            >
+              <ChevronLeft size={14} />
+            </button>
+
+            <button
+              onClick={handleMoveRight}
+              disabled={task.status === "done"}
+              className="p-1.5 rounded-lg transition"
+              style={{
+                background: "var(--bg-surface-2)",
+                border: "1px solid var(--border-subtle)",
+                opacity: task.status === "done" ? 0.4 : 1,
+              }}
+              aria-label="Move task right"
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import  { useMemo } from "react";
 
 type CompletionCircleProps = {
   completion: number;
@@ -14,7 +14,7 @@ export const CompletionCircle = ({ completion, done, total }: CompletionCirclePr
     return circumference - (completion / 100) * circumference;
   }, [completion, circumference]);
 
-  // تغيير اللون ديناميكي حسب النسبة
+  // change color -> percent
   const color = useMemo(() => {
     if (completion >= 80) return "var(--success)";
     if (completion >= 50) return "var(--warning)";
